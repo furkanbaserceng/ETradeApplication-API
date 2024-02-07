@@ -22,15 +22,31 @@ namespace ETradeAPI.API.Controllers
         [HttpGet]
         public async Task Get()
         {
-            await _productWriteRepository.AddAsync(new() { Name = "backend test", Price = 19, Stock = 33 });
-            var count = await _productWriteRepository.SaveAsync();
+
+            //Product p = await _productReadRepository.GetByIdAsync("6d0753c0-1998-4102-9e92-6de84849b7b9");
+            //p.Name = "product1";
+            //await _productWriteRepository.SaveAsync();
+
+            Product p = await _productReadRepository.GetByIdAsync("6d0753c0-1998-4102-9e92-6de84849b7b9",false);
+            p.Name = "product5";
+            await _productWriteRepository.SaveAsync();
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id)
+        [HttpGet]
+        [Route("get2")]
+        public async Task Get2()
         {
-            Product product = await _productReadRepository.GetByIdAsync(id);
-            return Ok(product);
+            await _productWriteRepository.AddRangeAsync(new()
+            {
+                new() {Name="laptop",Price=1000,Stock=1111},
+                new() {Name="laptop2",Price=2000,Stock=2222},
+                new() {Name="laptop3",Price=3000,Stock=3333}
+            });
+
+            await _productWriteRepository.SaveAsync();
+           
         }
+
+
     }
 }
