@@ -1,6 +1,6 @@
 # ETradeAPI
 
-Kullanılan Paketler:
+Kullanılan Paketler:\
 --> Microsoft.EntityFrameworkCore v6.0.3\
 --> Npgsql.EntityFrameworkCore.PostgreSQL v.6.0.3\
 --> Microsoft.EntityFrameworkCore.Tools v6.0.3\
