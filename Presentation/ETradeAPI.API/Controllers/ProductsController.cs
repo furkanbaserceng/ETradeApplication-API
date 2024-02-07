@@ -1,4 +1,5 @@
-﻿using ETradeAPI.Application.Abstractions;
+﻿using ETradeAPI.Application.Repositories;
+using ETradeAPI.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,20 +10,27 @@ namespace ETradeAPI.API.Controllers
     public class ProductsController : ControllerBase
     {
 
-        //private readonly IProductService _productService;
+        private readonly IProductReadRepository _productReadRepository;
+        private readonly IProductWriteRepository _productWriteRepository;
 
-        //public ProductsController(IProductService productService)
-        //{
-        //    _productService = productService;
-        //}
+        public ProductsController(IProductWriteRepository productWriteRepository, IProductReadRepository productReadRepository)
+        {
+            _productWriteRepository = productWriteRepository;
+            _productReadRepository = productReadRepository;
+        }
 
+        [HttpGet]
+        public async Task Get()
+        {
+            await _productWriteRepository.AddAsync(new() { Name = "backend test", Price = 19, Stock = 33 });
+            var count = await _productWriteRepository.SaveAsync();
+        }
 
-        //[HttpGet]
-        //public IActionResult GetProducts()
-        //{
-        //    var products = _productService.GetProducts();
-        //    return Ok(products);
-        //}
-
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(string id)
+        {
+            Product product = await _productReadRepository.GetByIdAsync(id);
+            return Ok(product);
+        }
     }
 }
