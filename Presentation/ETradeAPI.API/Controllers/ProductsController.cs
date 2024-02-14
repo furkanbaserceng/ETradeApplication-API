@@ -20,16 +20,17 @@ namespace ETradeAPI.API.Controllers
         }
 
         [HttpGet]
-        public async Task Get()
+        public IActionResult Get()
         {
 
             //Product p = await _productReadRepository.GetByIdAsync("6d0753c0-1998-4102-9e92-6de84849b7b9");
             //p.Name = "product1";
             //await _productWriteRepository.SaveAsync();
 
-            Product p = await _productReadRepository.GetByIdAsync("6d0753c0-1998-4102-9e92-6de84849b7b9",false);
-            p.Name = "product5";
-            await _productWriteRepository.SaveAsync();
+            //Product p = await _productReadRepository.GetByIdAsync("6d0753c0-1998-4102-9e92-6de84849b7b9",false);
+            //p.Name = "product5";
+            //await _productWriteRepository.SaveAsync();
+            return Ok(_productReadRepository.GetAll());
         }
 
         [HttpGet]
