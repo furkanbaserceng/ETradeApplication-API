@@ -70,8 +70,8 @@ namespace ETradeAPI.API.Controllers
 
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteProduct([FromQuery] string id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProduct( [FromRoute] string id)
         {
             await _productWriteRepository.RemoveAsync(id);
             await _productWriteRepository.SaveAsync();
