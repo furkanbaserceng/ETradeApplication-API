@@ -39,6 +39,10 @@ namespace ETradeAPI.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProduct([FromBody] ProductCreateViewModel model)
         {
+            //if (ModelState.IsValid)
+            //{
+               
+            //}
 
             await _productWriteRepository.AddAsync(new Product()
             {
